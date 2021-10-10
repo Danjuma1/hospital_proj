@@ -64,8 +64,12 @@ def afterlogin_view(request):
 
 
 # Dashboards
+@login_required(login_url='doctor-login')
+@user_passes_test(is_doctor)
 def doctor_dashboard_view(request):
     return render(request, 'core/doctor_dashboard.html')
 
+@login_required(login_url='patient-login')
+@user_passes_test(is_patient)
 def patient_dashboard_view(request):
     return render(request, 'core/patient_dashboard.html')
