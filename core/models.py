@@ -8,7 +8,7 @@ class Doctor(models.Model):
     address = models.CharField(max_length=40)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    phone = models.Phone_NumberField()
+    phone = models.CharField(max_length=20)
     email = models.EmailField()
 
     @property
@@ -30,7 +30,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=40)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
-    phone = models.Phone_NumberField()
+    phone = models.CharField(max_length=20)
     email = models.EmailField()
 
     @property
