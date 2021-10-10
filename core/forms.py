@@ -7,10 +7,10 @@ from . import models
 class DoctorUserForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password1', 'password2']
-        # widgets = {
-        # 'password': forms.PasswordInput()
-        # }
+        fields=['first_name','last_name','username','password']
+        widgets = {
+        'password': forms.PasswordInput()
+        }
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
@@ -21,10 +21,10 @@ class DoctorForm(forms.ModelForm):
 class PatientUserForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password1', 'password2']
-        # widgets = {
-        # 'password': forms.PasswordInput()
-        # }
+        fields=['first_name','last_name','username','password']
+        widgets = {
+        'password': forms.PasswordInput()
+        }
 class PatientForm(forms.ModelForm):
     class Meta:
         model=models.Doctor

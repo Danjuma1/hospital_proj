@@ -7,7 +7,7 @@ from . import forms, models
 
 # Home view
 def home_view(request):
-    return render(request, 'hospital/index.html')
+    return render(request, 'core/index.html')
 
 # Doctor signup view
 def doctor_signup_view(request):
@@ -27,7 +27,7 @@ def doctor_signup_view(request):
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
         return HttpResponseRedirect('doctor-login')
-    return render(request, 'hospital/doctorsignup.html', context=mydict)
+    return render(request, 'core/doctorsignup.html', context=mydict)
 
 # Patient signup view
 def patient_signup_view(request):
@@ -47,7 +47,7 @@ def patient_signup_view(request):
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
         return HttpResponseRedirect('patient-login')
-    return render(request, 'hospital/patientsignup.html', context=mydict)
+    return render(request, 'core/patientsignup.html', context=mydict)
 
 
 # Check if user is doctor or patient upon login to return respective dashboard
@@ -65,7 +65,7 @@ def afterlogin_view(request):
 
 # Dashboards
 def doctor_dashboard_view(request):
-    return render(request, 'hospital/doctor_dashboard.html')
+    return render(request, 'core/doctor_dashboard.html')
 
 def patient_dashboard_view(request):
-    return render(request, 'hospital/patient_dashboard.html')
+    return render(request, 'core/patient_dashboard.html')
