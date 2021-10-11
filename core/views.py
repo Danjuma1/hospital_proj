@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
+from django.contrib import messages
 
 from . import forms, models
 
@@ -10,6 +11,8 @@ def home_view(request):
     return render(request, 'core/index.html')
 
 # Doctor signup view
+
+
 def doctor_signup_view(request):
     userForm = forms.DoctorUserForm()
     doctorForm = forms.DoctorForm()
@@ -21,7 +24,7 @@ def doctor_signup_view(request):
             user = userForm.save()
             user.set_password(user.password)
             user.save()
-            doctor = doctorForm.save()
+            doctor = doctorForm.save(commit=True)
             doctor.user = user
             doctor = doctor.save()
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
@@ -29,7 +32,7 @@ def doctor_signup_view(request):
         return HttpResponseRedirect('doctor-login')
     return render(request, 'core/doctorsignup.html', context=mydict)
 
-# Patient signup view
+# Patient signup view    
 def patient_signup_view(request):
     userForm = forms.PatientUserForm()
     patientForm = forms.PatientForm()
@@ -41,11 +44,11 @@ def patient_signup_view(request):
             user = userForm.save()
             user.set_password(user.password)
             user.save()
-            patient = patientForm.save()
+            patient = patientForm.save(commit=True)
             patient.user = user
             patient = patient.save()
-            my_patient_group = Group.objects.get_or_create(name='PATIENT')
-            my_patient_group[0].user_set.add(user)
+            my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
+            my_doctor_group[0].user_set.add(user)
         return HttpResponseRedirect('patient-login')
     return render(request, 'core/patientsignup.html', context=mydict)
 

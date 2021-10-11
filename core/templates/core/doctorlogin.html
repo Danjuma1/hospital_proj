@@ -1,1 +1,29 @@
-<h1>Doctor login</h1>
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="container">
+    <div class="bg-light p-5 rounded">
+      <h1>Login</h1>
+      <div class="text-small">Don't have an account? <a href="{% url 'patient-signup' %}">Signup here</a></div>
+      <hr>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="Text" class="form-label">Username</label>
+          {% render_field form.username class="form-control" placeholder="Username" %}
+        </div>
+        <div class="mb-3">
+          <label for="InputPassword1" class="form-label">Password</label>
+          {% render_field form.password class="form-control" placeholder="Password" %}
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+</main>
+{% endblock content %}

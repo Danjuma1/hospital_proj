@@ -1,31 +1,29 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 from . import models
 
 #Doctor related forms
-class DoctorUserForm(forms.ModelForm):
+class DoctorUserForm(UserCreationForm):
+    email = forms.EmailField()
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password']
-        widgets = {
-        'password': forms.PasswordInput()
-        }
+        fields=['first_name','last_name','username', 'email', 'password1', 'password2']
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=models.Doctor
-        fields=['phone','email', 'address', 'city', 'state', 'profile_pic']
+        fields=['phone', 'address', 'city', 'state', 'profile_pic']
 
 
 #Patient related forms
-class PatientUserForm(forms.ModelForm):
+class PatientUserForm(UserCreationForm):
+    email = forms.EmailField()
     class Meta:
         model=User
-        fields=['first_name','last_name','username','password']
-        widgets = {
-        'password': forms.PasswordInput()
-        }
+        fields=['first_name','last_name','username', 'email', 'password1', 'password2']
+        
 class PatientForm(forms.ModelForm):
     class Meta:
-        model=models.Doctor
-        fields=['phone','email', 'address', 'city', 'state', 'profile_pic']
+        model=models.Patient
+        fields=['phone', 'address', 'city', 'state', 'profile_pic']
