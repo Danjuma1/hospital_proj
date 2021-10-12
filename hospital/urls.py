@@ -26,12 +26,14 @@ urlpatterns = [
     path('doctor-signup', views.doctor_signup_view, name='doctor-signup'),
     path('patient-signup', views.patient_signup_view, name='patient-signup'),
 
-    path('doctor-login', LoginView.as_view(template_name='core/doctorlogin.html'), name='doctor-login'),
-    path('patient-login', LoginView.as_view(template_name='core/patientlogin.html'), name='patient-login'),
+    path('login', LoginView.as_view(template_name='core/login.html'), name='doctor-login'),
+    # path('patient-login', LoginView.as_view(template_name='core/patientlogin.html'), name='patient-login'),
 
+    # path('afterlogin', views.afterlogin_view,name='afterlogin'),
+    
     path('logout', LogoutView.as_view(template_name='core/logout.html'), name='logout'),
 
-    path('doctor-dashboard', views.doctor_dashboard_view, name='doctor-dashboard'),
-    path('patient-dashboard', views.patient_dashboard_view, name='patient-dashboard'),
+    path('dashboard', views.dashboard_view, name='dashboard'),
+    # path('patient-dashboard', views.patient_dashboard_view, name='patient-dashboard'),
 
 ]
