@@ -54,33 +54,7 @@ def patient_signup_view(request):
     return render(request, 'core/patientsignup.html', context=mydict)
 
 
-# Check if user is doctor or patient upon login to return respective dashboard
-
-
-# def is_doctor(user):
-#     return user.groups.filter(name='DOCTOR').exists()
-# def is_patient(user):
-#     return user.groups.filter(name='PATIENT').exists()
-
-
-# def afterlogin_view(request):
-#     if is_doctor(request.user):
-#         accountapproval = models.Doctor.objects.all().filter(user_id=request.user.id, status=True)
-#         if accountapproval:
-#             return HttpResponseRedirect('doctor-dashboard')
-#     elif is_patient(request.user):
-#         accountapproval = models.Patient.objects.all().filter(user_id=request.user.id, status=True)
-#         if accountapproval:
-#             return HttpResponseRedirect('patient-dashboard')
-        
-
 # Dashboards
 @login_required(login_url='login')
-# @user_passes_test(is_doctor)
 def dashboard_view(request):
     return render(request, 'core/dashboard.html')
-
-# @login_required(login_url='patient-login')
-# # @user_passes_test(is_patient)
-# def patient_dashboard_view(request):
-#     return render(request, 'core/patient_dashboard.html')

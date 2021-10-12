@@ -1,3 +1,18 @@
-<h1>Well come to dashboard</h1>
+{% extends 'core/base.html' %}
 
-<small>Logout <a href="{% url 'logout' %}">here</a></small>
+{% block content %}
+
+<main class="container">
+    <div class="bg-light p-5 rounded">
+    <h3>Dashboard</h3>
+    <hr>
+    <img class="rounded-circle account-img" src="{{ profile_pic.profile_pic.url }}">
+      <h1>{{ user.first_name.title }} {{ user.last_name.title }}</h1>
+      <p class="lead">Username: {{ user.username }}</p>
+      <p class="lead">Email: {{ user.email }}</p>
+      <p class="lead">{{ user.state }}</p>
+
+    </div>
+</main>
+
+{% endblock content%}
