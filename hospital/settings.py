@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'django_bootstrap5',
     'widget_tweaks',
+    'blog',
 ]
 
 MIDDLEWARE = [
