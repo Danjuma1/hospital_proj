@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 # Doctor model class
 class Doctor(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to='images/DoctorProfilePic/', default='doctor.png')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to='DoctorProfilePic/', default='doctor.png')
     address = models.CharField(max_length=40)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
@@ -24,8 +24,8 @@ class Doctor(models.Model):
 
 # Patient model class
 class Patient(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to='images/PatientProfilePic/', default='patient.jpg')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to='PatientProfilePic/', default='patient.jpg')
     address = models.CharField(max_length=40)
     state = models.CharField(max_length=20)
     city = models.CharField(max_length=20)

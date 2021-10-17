@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<main class="container">
+    <div class="bg-light p-5 rounded">
+    <h3>Dashboard</h3>
+    <hr>
+    <img class="rounded-circle account-img" src="{{ doctor.profile_pic.url }}" alt="Profie Pic">
+      <h1>{{ user.first_name.title }} {{ user.last_name.title }}</h1>
+      <p class="lead">Username: {{ user.username }}</p>
+      <p class="lead">Email: {{ user.email }}</p>
+      <p class="lead">{{ doctor.state }}</p>
+    </div>
+</main>
+
+<main class="container">
+  <div class="bg-light p-5 rounded">
+  <h3>Blog Section</h3>
+  <hr>
+  <!-- <img class="rounded-circle account-img" src="{{ doctor.profile_pic.url }}" alt="Profie Pic">
+    <h1>{{ user.first_name.title }} {{ user.last_name.title }}</h1>
+    <p class="lead">Username: {{ user.username }}</p>
+    <p class="lead">Email: {{ user.email }}</p>
+    <p class="lead">{{ doctor.state }}</p>
+  </div> -->
+</main>
+
+
+{% endblock content%}

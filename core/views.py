@@ -12,8 +12,6 @@ def home_view(request):
     return render(request, 'core/index.html')
 
 # Doctor signup view
-
-
 def doctor_signup_view(request):
     userForm = forms.DoctorUserForm()
     doctorForm = forms.DoctorForm()
@@ -25,12 +23,13 @@ def doctor_signup_view(request):
             user = userForm.save()
             user.set_password(user.password)
             user.save()
-            doctor = doctorForm.save(commit=True)
+            doctor = doctorForm.save(commit=False)
             doctor.user = user
-            doctor = doctor.save()
+            doctor.status=True
+            doctor.save()
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
-        return HttpResponseRedirect('login')
+        return HttpResponseRedirect('doctor-login')
     return render(request, 'core/doctorsignup.html', context=mydict)
 
 # Patient signup view    
@@ -45,16 +44,41 @@ def patient_signup_view(request):
             user = userForm.save()
             user.set_password(user.password)
             user.save()
-            patient = patientForm.save(commit=True)
+            patient = patientForm.save(commit=False)
             patient.user = user
-            patient = patient.save()
-            my_doctor_group = Group.objects.get_or_create(name='PATIENT')
-            my_doctor_group[0].user_set.add(user)
-        return HttpResponseRedirect('login')
+            patient.status=True
+            patient.save()
+            my_patient_group = Group.objects.get_or_create(name='PATIENT')
+            my_patient_group[0].user_set.add(user)
+        return HttpResponseRedirect('patient-login')
     return render(request, 'core/patientsignup.html', context=mydict)
 
+# check if user is doctor or patient then redirect to login
+def is_doctor(user):
+    return user.groups.filter(name='DOCTOR').exists()
+def is_patient(user):
+    return user.groups.filter(name='PATIENT').exists()
 
-# Dashboards
-@login_required(login_url='login')
-def dashboard_view(request):
-    return render(request, 'core/dashboard.html')
+def afterlogin_view(request):
+    if is_doctor(request.user):
+        return redirect('doctor-dashboard')
+        
+    elif is_patient(request.user):
+        return redirect('patient-dashboard')
+        
+
+
+@login_required(login_url='doctor-login')
+@user_passes_test(is_doctor)
+def doctor_dashboard_view(request):
+    doctor = models.Doctor.objects.get(user_id=request.user.id)
+    context = {'doctor':doctor}
+    return render(request,'core/doctor_dashboard.html', context)
+
+
+@login_required(login_url='patient-login')
+@user_passes_test(is_patient)
+def patient_dashboard_view(request):
+    return render(request,'core/patient_dashboard.html')
+
+
