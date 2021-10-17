@@ -18,7 +18,7 @@ class Blogpost(models.Model):
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True, null=True, blank=True)
-    image = models.ImageField(upload_to='images/BlogImages')
+    image = models.ImageField(upload_to='BlogImages')
     content = models.TextField(max_length=40000)
     summary = models.CharField(max_length=1500)
     status = models.IntegerField(choices=STATUS, default=1)

@@ -3,16 +3,19 @@ from .models import Blogpost
 from .forms import PostForm
 from django.views.generic import ListView 
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core import views
 
+@login_required(login_url='doctor-login')
 def add_blog_post(request):
 	if request.method == 'POST':
 		form = PostForm(request.POST)
 		if form.is_valid():
 			post = form.save(commit=False)
 			post.author = request.user
+			post.status = True
 			post.save()
-			
 			return redirect('blog_details', post.slug)
 	else:
 		form = PostForm()
@@ -24,11 +27,9 @@ class PostList(ListView):
 	template_name = 'blog/post_list.html'
 	context_object_name = 'posts'
 	paginate_by = 10
+	queryset = Blogpost.objects.filter(status=1).order_by('-created_date')
 
-	def get_queryset(self):
-		queryset = super().get_queryset()
-		return queryset.filter(created_date=timezone.now() ).order_by('-created_date')
-
+	
 
 def post_draft(request):
 	draft = Blogpost.objects.filter(status=0).filter(author = request.user).order_by('created_date')

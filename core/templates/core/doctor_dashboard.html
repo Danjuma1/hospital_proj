@@ -18,12 +18,25 @@
   <div class="bg-light p-5 rounded">
   <h3>Blog Section</h3>
   <hr>
-  <!-- <img class="rounded-circle account-img" src="{{ doctor.profile_pic.url }}" alt="Profie Pic">
-    <h1>{{ user.first_name.title }} {{ user.last_name.title }}</h1>
-    <p class="lead">Username: {{ user.username }}</p>
-    <p class="lead">Email: {{ user.email }}</p>
-    <p class="lead">{{ doctor.state }}</p>
-  </div> -->
+  <div>
+    <a class="btn btn-primary" href='{% url "add_blog_post" %}'>Add New blog post</a>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mt-3 left">
+    {% for post in posts %}
+       
+        <div class="card-body">
+          <h2 class="card-title"><a href="{%url 'blog_details' post.slug  %}">{{post.title}}</a></h2>
+          <h6><div class="">{{post.content| truncatechars:200}}...</div></h6>
+       
+         <div class=""> By {{post.author | title }}</a>
+        </div>
+         </div>
+      <hr>
+      <hr>
+    {% endfor %}
+    </div>
+  </div>
 </main>
 
 

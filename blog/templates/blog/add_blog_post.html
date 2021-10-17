@@ -1,1 +1,44 @@
-<h1>Add new blog post</h1>
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="container">
+    <div class="bg-light p-5 rounded">
+      <h1>Add a new Blog Post</h1>
+      <hr>
+        
+      <form method='POST'>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="Text" class="form-label">Title</label>
+            {% render_field form.title class="form-control" placeholder="Title" %}
+          </div>
+          <div class="mb-3">
+            <label for="Category" class="form-label">Category</label>
+            {% render_field form.category class="form-control" placeholder="Category" %}
+          </div>
+          <div class="mb-3">
+            <label for="Image" class="form-label">Image</label>
+            {% render_field form.image class="form-control" placeholder="Image" %}
+          </div>
+          <div class="mb-3">
+            <label for="Content" class="form-label">Content</label>
+            {% render_field form.content class="form-control" placeholder="Content" %}
+          </div>
+          <div class="mb-3">
+            <label for="Summary" class="form-label">Summary</label>
+            {% render_field form.summary class="form-control" placeholder="Summary" %}
+          </div>
+          <div class="mb-3">
+            <label for="Status" class="form-label">Status</label>
+            {% render_field form.status class="form-control" placeholder="Status" %}
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      
+    </div>
+</main>
+
+
+{% endblock content %}

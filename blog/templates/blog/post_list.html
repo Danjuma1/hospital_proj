@@ -1,1 +1,24 @@
-<h1>Post List</h1>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 left">
+        {% for post in posts %}
+           
+            <div class="card-body">
+              <h2 class="card-title"><a href="{%url 'blog_details' post.slug  %}">{{post.title}}</a></h2>
+              <h6><div class="">{{post.content| truncatechars:200}}...</div></h6>
+           
+             <div class=""> By {{post.author | title }}</a>
+            </div>
+             </div>
+          <hr>
+          <hr>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
