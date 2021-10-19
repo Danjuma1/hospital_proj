@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+<main class="container">
+    <div class="bg-light p-5 rounded">
+      <h3>Your Appointments</h3>
+      <hr>
+            <div class="panel panel-primary">
+                <table class="table table-hover" id="dev-table">
+                <thead>
+                    <tr>
+                    <th>Doctor Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    </tr>
+                </thead>
+                {% for a in appointments %}
+                <tr>
+                    <td> {{a.doctorName}}</td>
+                    <td>{{a.description}}</td>
+                    <td>{{a.appointmentDate}}</td>
+                    {%if a.status%}
+                    <td> <span class="label label-primary">Confirmed</span></td>
+                    {% else %}
+                    <td> <span class="label label-success">Pending</span></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+    </div>
+</main>
+
+{% endblock content %}

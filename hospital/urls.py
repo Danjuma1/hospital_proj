@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name='home'),
     path('', include('blog.urls')),
+    path('', include('appointment.urls')),
 
     path('doctor-signup', views.doctor_signup_view, name='doctor-signup'),
     path('patient-signup', views.patient_signup_view, name='patient-signup'),
@@ -36,5 +37,6 @@ urlpatterns = [
 
     path('doctor-dashboard', views.doctor_dashboard_view, name='doctor-dashboard'),
     path('patient-dashboard', views.patient_dashboard_view, name='patient-dashboard'),
+    
 
 ]

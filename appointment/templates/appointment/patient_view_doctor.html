@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+
+<main class="container">
+    <div class="bg-light p-5 rounded">
+      <h3>Available Doctors</h3>
+      <hr>
+      {% if doctors %}
+  <div class="panel panel-primary">
+    <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+  
+            <th>Name</th>
+            <th>Profile Picture</th>
+            <th>Mobile</th>
+            <th>Book Appointment</th>
+           
+          </tr>
+        </thead>
+        {% for d in doctors %}
+        <tr>
+  
+          <td> {{d.get_name}}</td>
+          <td> <img src="#" alt="Profile Pic" height="40px" width="40px" /></td>
+          <td>{{d.phone}}</td>
+          <td><a class="btn btn-primary" href="{% url 'patient-book-appointment' %}"> Book Doctor </a></td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+  {%else%}
+  <br><br><br>
+  <h4 style="text-align: center;color: red;">No Doctor Found !!!</h4>
+  {% endif %}
+    </div>
+  </main>
+
+
+
+{% endblock content %}

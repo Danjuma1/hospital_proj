@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+
+<main class="container">
+    <div class="bg-light p-5 rounded">
+      <h3>Book Appointment</h3>
+      <hr>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="container register-form">
+          <div class="form">
+            <div class="note">
+              <p>Book Appointment Details</p>
+            </div>
+            <div class="form-content">
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        {% render_field appointmentForm.doctorId class="form-control" placeholder="Doctor" %}
+                    </div>
+                  <div class="form-group">
+                    {% render_field appointmentForm.description class="form-control" placeholder="Description" %}
+                  </div>
+                  <div class="form-group">
+                    {% render_field appointmentForm.appointmentDate class="form-control" placeholder="Appointment Date and Time" %}
+                  </div>
+                  
+      
+                </div>
+      
+              </div>
+              <button type="submit" class="btn btn-primary">Book</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+  </main>
+
+
+
+
+{% endblock content %}
