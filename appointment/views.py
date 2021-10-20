@@ -49,22 +49,13 @@ def patient_appointment_view(request):
 def patient_book_appointment_view(request):
     appointmentForm = PatientAppointmentForm()
     patient = Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
-    message=None
-    mydict={'appointmentForm':appointmentForm,'patient':patient,'message':message}
+    message = None
+    mydict = {'appointmentForm':appointmentForm, 'patient':patient, 'message':message}
     if request.method=='POST':
         appointmentForm = PatientAppointmentForm(request.POST)
         if appointmentForm.is_valid():
-            print(request.POST.get('doctorId'))
-            desc=request.POST.get('description')
-
-            doctor = Doctor.objects.get(user_id=request.POST.get('doctorId'))
-            
-            appointment=appointmentForm.save(commit=False)
-            appointment.doctorId=request.POST.get('doctorId')
-            appointment.patientId=request.user.id #----user can choose any patient but only their info will be stored
-            appointment.doctorName = User.objects.get(id=request.POST.get('doctorId')).first_name
-            appointment.patientName=request.user.first_name #----user can choose any patient but only their info will be stored
-            appointment.status=False
+            # doctor = Doctor.objects.get(user_id=request.POST.get('doctor'))
+            appointment=appointmentForm.save(commit=True)
             appointment.save()
         return HttpResponseRedirect('patient-view-appointment')
     return render(request,'appointment/patient_book_appointment.html',context=mydict)
@@ -82,7 +73,7 @@ def patient_view_doctor_view(request):
 @user_passes_test(is_patient)
 def patient_view_appointment_view(request):
     patient = Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
-    appointments = Appointment.objects.all().filter(patientId=request.user.id)
+    appointments = Appointment.objects.all().filter(user=request.user.id)
     return render(request,'appointment/patient_view_appointment.html',{'appointments':appointments,'patient':patient})
 
 
